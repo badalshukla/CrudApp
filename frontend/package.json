@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/file-input": "^7.0.1",
     "@angular/animations": "~13.2.0",
     "@angular/cdk": "^13.2.3",
     "@angular/common": "~13.2.0",
@@ -20,7 +21,11 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "angular-confirmation-popover": "^6.0.0",
     "express": "^4.17.3",
+    "ng2-file-upload": "^1.4.0",
+    "ngx-material-file-input": "^3.0.0",
+    "ngx-toastr": "^14.2.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

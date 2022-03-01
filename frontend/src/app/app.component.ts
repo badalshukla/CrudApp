@@ -26,7 +26,8 @@ export class AppComponent implements OnInit {
   }
   openDialog() {
     this.dialog.open(AddDetailsComponent, {
-      width:'30%'
+      width:'30%',
+      height:'90%'
     })
   }
 }

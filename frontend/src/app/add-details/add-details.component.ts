@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup,FormBuilder,Validator, Validators, FormControlName } from '@angular/forms';
+import { FormGroup,FormBuilder, Validators, } from '@angular/forms';
 import { ApiService } from '../sevices/api.service';
 import { MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HomeComponent } from '../home/home.component';
@@ -10,7 +10,7 @@ import { HomeComponent } from '../home/home.component';
   styleUrls: ['./add-details.component.css']
 })
 export class AddDetailsComponent implements OnInit {
-
+  public file: string = '';
   detailsForm!:FormGroup;
   actionBtn:string="save"
   constructor(private formBuilder:FormBuilder,
@@ -20,12 +20,13 @@ export class AddDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.detailsForm=this.formBuilder.group({
-      name:['',Validators.required],
-      gender:['',Validators.required],
-      date:['',Validators.required],
-      mobile:['',Validators.required],
-      email:['',Validators.required],
-      city:['',Validators.required],
+      name:[null,[Validators.required,Validators.minLength(2)]],
+      gender:[null,[Validators.required]],
+      date:[null,[Validators.required]],
+      mobile:[null,[Validators.required,Validators.minLength(10),Validators.maxLength(13)]],
+      email:[null,[Validators.required,Validators.email]],
+      city:[null,[Validators.required,Validators.minLength(3)]],
+      image:[null,[Validators.required]]
     })
     if(this.editData){
       this.actionBtn="update";
@@ -35,15 +36,24 @@ export class AddDetailsComponent implements OnInit {
       this.detailsForm.controls['mobile'].setValue(this.editData.mobile);
       this.detailsForm.controls['email'].setValue(this.editData.email);
       this.detailsForm.controls['city'].setValue(this.editData.city);
+      this.detailsForm.controls['image'].setValue(this.editData.city);
     }
     
   }
+
+  onFileChange($event:any) {
+    console.log("================================ashish========")
+    this.file = $event.target.files[0]; // <--- File Object for future use.
+    let file = $event.target.files[0]; // <--- File Object for future use.
+    this.detailsForm.controls['image'].setValue(file ? file.name : ''); // <-- Set Value for Validation
+}
+
   addDetails(){
     if(!this.editData){
       if(this.detailsForm.valid){
         this.api.postDetails(this.detailsForm.value).subscribe({
           next:(res)=>{
-            alert("Deatils Added Successfully 👌");
+            alert("Details Added Successfully 👌");
             this.detailsForm.reset();
             this.dailogref.close();
           },

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,15 +9,15 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
   postDetails(data:any){
-      return this.http.post<any>(" http://localhost:5000/api/v1/employees/?",data);
+      return this.http.post<any>(environment.api_url+"/?",data);
   }
   getDetails(){
-    return this.http.get<any>(" http://localhost:5000/api/v1/employees",);
+    return this.http.get<any>(environment.api_url,);
   }
   putDetails(data:any,id:any){
-    return this.http.put<any>(" http://localhost:5000/api/v1/employees/"+id,data);
+    return this.http.put<any>(environment.api_url+"/"+id,data);
   }
   deleteDetails(id:number){
-    return this .http.delete<any>(" http://localhost:5000/api/v1/employees/"+id);
+    return this .http.delete<any>(environment.api_url+"/"+id);
   }
 }

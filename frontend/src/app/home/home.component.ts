@@ -13,6 +13,10 @@ import { AddDetailsComponent } from '../add-details/add-details.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  public popoverTitle:string='popoverTitle';
+  public popoverMessage:string='popoverDescription';
+  public confirmClicked:boolean=false;
+  public cancelClicked:boolean=false;
   displayedColumns: string[] = ['name', 'gender', 'date', 'mobile','email','city','action'];
   dataSource!: MatTableDataSource<any>;
 
@@ -22,13 +26,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllDetails();
+    this.popoverTitle="Are You Sure ";
+    this.popoverMessage="Deleted Successfully";
+    
   }
   getAllDetails(){
     this.api.getDetails().subscribe({next:(res)=>{
     this.dataSource=new MatTableDataSource(res);
     this.dataSource.paginator= this.paginator;
     this.dataSource.sort=this.sort;
-    
+
     },
     error:(err)=>{
       alert("error");
@@ -48,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
  deleteDetails(id:number){
    this.api.deleteDetails(id).subscribe({next:(res)=>{
-     alert("Details Deleted Successfully👌");
+   
      this.getAllDetails();
    },
    error:()=>{

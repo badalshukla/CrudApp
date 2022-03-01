@@ -1,12 +1,14 @@
 const EmployeeModel=require('../models/employee.model')
+//multer
+
 //for getting all data
 exports.getEmployeeList=(req,res)=>{
     //console.log("here is all employee list");
     EmployeeModel.getAllEmployees((err,employees)=>{
-        console.log("we are here Now");
+        //console.log("we are here Now");
         if(err)
         res.send(err);
-        console.log('Employees',employees);
+        //console.log('Employees',employees);
         res.send(employees);
     })
 }
@@ -15,10 +17,10 @@ exports.getEmployeeList=(req,res)=>{
 exports.getEmployeeById=(req,res)=>{
    //console.log("you can get by id");
    EmployeeModel.getEmployeeById(req.params.id,(err,employees)=>{
-    console.log("we are here Now");
+   // console.log("we are here Now");
     if(err)
     res.send(err);
-    console.log('Employees',employees);
+    //console.log('Employees',employees);
     res.send(employees);
 })
 }
@@ -27,7 +29,7 @@ exports.getEmployeeById=(req,res)=>{
 //post new employees
 exports.createNewEmployee=(req,res)=>{
     const employeeReqData=new EmployeeModel(req.body);
-        console.log("requested data",employeeReqData); 
+       // console.log("requested data",employeeReqData); 
         if(req.body.constructor === Object && Object.keys(req.body).length===0){
             res.send(400).send({success:false,message:'Please Fill All The Fields'});
         }else{
@@ -45,11 +47,11 @@ exports.createNewEmployee=(req,res)=>{
 //updation of the details
 exports.updateEmployee=(req,res)=>{
     const employeeReqData=new EmployeeModel(req.body);
-    console.log("requested data",employeeReqData); 
+    //console.log("requested data",employeeReqData); 
     if(req.body.constructor === Object && Object.keys(req.body).length===0){
         res.send(400).send({success:false,message:'update which one you have to update'});
     }else{
-        console.log("valid data");
+        //console.log("valid data");
         
         EmployeeModel.updateEmployee(req.params.id,employeeReqData,(err,employee)=>{
             if(err)
@@ -66,10 +68,10 @@ exports.updateEmployee=(req,res)=>{
 exports.deleteEmployee=(req,res)=>{
 
     EmployeeModel.deleteEmployee(req.params.id,(err,employees)=>{
-        console.log("we are here Now");
+       // console.log("we are here Now");
         if(err)
         res.send(err);
-        console.log('Employees',employees);
+       // console.log('Employees',employees);
         res.send(employees);
     })
 

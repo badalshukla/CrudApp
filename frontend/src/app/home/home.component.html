@@ -1,11 +1,11 @@
 <div class="container">
     <div style="margin: top 10px;">
       <mat-form-field appearance="standard">
-        <mat-label>Search here👇</mat-label>
+        <mat-label><b>Search here👇</b></mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
       </mat-form-field>
       
-      <div class="mat-elevation-z8">
+      <div class="mat-elevation-z8" >
         <table mat-table [dataSource]="dataSource" matSort>
       
        
@@ -44,7 +44,9 @@
               <button mat-icon-button (click)=" editDetails(row)" color="primary">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="deleteDetails(row.id)" color="warn">
+              <button mat-icon-button mwlConfirmationPopover
+              (popoverTitle)="popoverTitle" (popoverMessage)="popoverMessage" placement="left"
+              (confirm)="deleteDetails(row.id)" (cancel)="cancelClicked =true" color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
   

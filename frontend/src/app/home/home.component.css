@@ -10,3 +10,7 @@ table {
     max-width: 1200px;
     margin:0 auto;
   }
+ th{
+  font-weight: bold;
+  background-color: yellow;
+ }
